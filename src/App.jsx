@@ -7,10 +7,19 @@ export default function App() {
     { src: "images/pic5.jpg", alt: "Large moth on a leaf" },
   ];
 
-    return (
-      <>
-        <h1>Image gallery example</h1>
-        <div className="thumb-bar">
+  return (
+    <>
+      <h1>Image gallery example</h1>
+      <div className="full-img">
+        <img
+          className="displayed-img"
+          src="images/pic1.jpg"
+          alt="Closeup of a human eye"
+        />
+        <div className="overlay"></div>
+        <button className="dark">Darken</button>
+      </div>
+      <div className="thumb-bar">
         {imageArray.map((image, index) => (
           <img
             key={index}
@@ -19,10 +28,7 @@ export default function App() {
             alt={image.alt}
           />
         ))}
-          <div className="overlay"></div>
-          <button className="dark">Darken</button>
-        </div>
-        <div className="thumb-bar"></div>
-      </>
-    );
-  }
+      </div>
+    </>
+  );
+}
