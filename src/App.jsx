@@ -1,3 +1,6 @@
+import React, { useState } from "react";
+
+
 export default function App() {
   const imageArray = [
     { src: "images/pic1.jpg", alt: "Closeup of a human eye" },
@@ -7,14 +10,20 @@ export default function App() {
     { src: "images/pic5.jpg", alt: "Large moth on a leaf" },
   ];
 
+  const [mainImage, setMainImage] = useState(imageArray[0]);
+
+  const handleThumbnailClick = (image) => {
+    setMainImage(image);
+  };
+
   return (
     <>
       <h1>Image gallery example</h1>
       <div className="full-img">
         <img
           className="displayed-img"
-          src="images/pic1.jpg"
-          alt="Closeup of a human eye"
+          src={mainImage.src}
+          alt={mainImage.alt}
         />
         <div className="overlay"></div>
         <button className="dark">Darken</button>
@@ -26,6 +35,7 @@ export default function App() {
             className="thumbnail"
             src={image.src}
             alt={image.alt}
+            onClick={() => handleThumbnailClick(image)}
           />
         ))}
       </div>
