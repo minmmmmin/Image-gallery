@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-
 export default function App() {
   const imageArray = [
     { src: "images/pic1.jpg", alt: "Closeup of a human eye" },
@@ -11,23 +10,53 @@ export default function App() {
   ];
 
   const [mainImage, setMainImage] = useState(imageArray[0]);
+  const [isDarkened, setIsDarkened] = useState(false);
 
   const handleThumbnailClick = (image) => {
     setMainImage(image);
   };
 
+  const handleDarkenClick = () => {
+    setIsDarkened(!isDarkened);
+  };
+
+  const getBackgroundColor = () => {
+    let color = "transparent";
+    if (isDarkened) {
+      color = "rgba(0, 0, 0, 0.5)";
+    }
+    return color;
+  };
+
+  const getButtonLabel = () => {
+    let label = "Darken";
+    if (isDarkened) {
+      label = "Lighten";
+    }
+    return label;
+  };
+
   return (
     <>
       <h1>Image gallery example</h1>
+   
       <div className="full-img">
         <img
           className="displayed-img"
           src={mainImage.src}
           alt={mainImage.alt}
         />
-        <div className="overlay"></div>
-        <button className="dark">Darken</button>
+        <div
+          className="overlay"
+          style={{
+            backgroundColor: getBackgroundColor(),
+          }}
+        ></div>
+        <button className="dark" onClick={handleDarkenClick}>
+          {getButtonLabel()}
+        </button>
       </div>
+      
       <div className="thumb-bar">
         {imageArray.map((image, index) => (
           <img
